@@ -1,0 +1,150 @@
+/*
+ * tokens.css — Design tokens extracted from Figma
+ *
+ * All colours, fonts, spacing, radii, and shadows are defined here.
+ * Components consume these tokens — never raw hex or magic values.
+ */
+
+:root {
+  /* ─────────────────────────────────────────
+   * COLORS
+   * ───────────────────────────────────────── */
+
+  /* Brand */
+  --color-persian-blue:         #003BE2;
+  --color-lime-400:             #D4FB20;
+  --color-lime-500:             #CBFC01;
+  --color-lime-green-alt:       #C1E338;   /* "View More" button variant */
+  --color-electric-violet-600:  #7F30F7;
+  --color-electric-violet-950:  #300B6A;
+
+  /* Shuttle Gray scale */
+  --color-shuttle-950:          #242528;
+  --color-shuttle-900:          #3A3B3F;
+  --color-shuttle-800:          #424348;
+  --color-shuttle-700:          #4B4C53;
+  --color-shuttle-400:          #82868E;
+  --color-shuttle-200:          #CED0D3;
+  --color-shuttle-100:          #E5E6E8;
+  --color-shuttle-50:           #F5F5F6;
+
+  /* Neutrals */
+  --color-white:                #FFFFFF;
+  --color-near-black:           #040819;
+  --color-off-white:            #FAFAFA;
+  --color-black:                #000000;
+
+  /* ── Semantic aliases ── */
+  --color-bg-hero:              var(--color-persian-blue);
+  --color-bg-page:              var(--color-white);
+  --color-bg-section-light:     var(--color-shuttle-50);
+  --color-bg-section-off:       var(--color-off-white);
+
+  --color-text-primary:         var(--color-shuttle-950);
+  --color-text-secondary:       var(--color-shuttle-700);
+  --color-text-muted:           var(--color-shuttle-400);
+  --color-text-on-dark:         var(--color-white);
+  --color-text-link:            var(--color-persian-blue);
+
+  --color-border-default:       var(--color-shuttle-200);
+  --color-border-light:         var(--color-shuttle-100);
+
+  /* ─────────────────────────────────────────
+   * TYPOGRAPHY
+   * ───────────────────────────────────────── */
+
+  /* Font family variables are defined in fonts.css */
+
+  /* Font sizes */
+  --text-heading-l:             72px;
+  --text-heading-m:             44px;
+  --text-heading-s:             36px;
+  --text-heading-xs:            20px;
+
+  --text-display-s:             44px;
+  --text-display-xs:            36px;
+
+  --text-label-xl:              20px;
+  --text-label-l:               18px;
+  --text-label-m:               16px;
+  --text-label-s:               14px;
+  --text-label-xs:              12px;
+
+  --text-body-l:                18px;
+  --text-body-m:                16px;
+  --text-body-s:                14px;
+  --text-body-xs:               12px;
+
+  /* Line heights */
+  --lh-heading:                 1.2em;
+  --lh-body-l:                  1.6em;
+  --lh-body-m:                  1.6em;
+  --lh-label:                   1.2em;
+  --lh-label-xs:                20px;
+
+  /* Letter spacing */
+  --ls-heading:                 -0.01em;
+
+  /* ─────────────────────────────────────────
+   * BORDER RADIUS
+   * ───────────────────────────────────────── */
+
+  --radius-xs:                  8px;
+  --radius-s:                   12px;
+  --radius-m:                   16px;
+  --radius-l:                   24px;
+  --radius-xl:                  40px;
+  --radius-pill:                100px;
+  --radius-full:                9999px;
+
+  /* ─────────────────────────────────────────
+   * SPACING / LAYOUT
+   * ───────────────────────────────────────── */
+
+  --max-content-width:          1200px;
+  --page-padding-x:             120px;
+  --canvas-width:               1440px;
+
+  /* Responsive page padding */
+  --page-padding-x-tablet:      48px;
+  --page-padding-x-mobile:      20px;
+
+  /* ─────────────────────────────────────────
+   * SHADOWS
+   * ───────────────────────────────────────── */
+
+  /* Multi-layer card shadow (Figma effect "A") */
+  --shadow-card:
+    0.52px 0.74px 3.04px rgba(0, 0, 0, 0.04),
+    2.23px 3.19px 5.72px rgba(0, 0, 0, 0.06),
+    5.38px 7.69px 9.57px rgba(0, 0, 0, 0.07),
+    10.21px 14.58px 16.09px rgba(0, 0, 0, 0.08),
+    16.95px 24.21px 24px rgba(0, 0, 0, 0.09),
+    25.84px 36.91px 36px rgba(0, 0, 0, 0.10);
+
+  /* Floating card shadow */
+  --shadow-float:
+    0px 4px 12px rgba(0, 0, 0, 0.08),
+    0px 8px 24px rgba(0, 0, 0, 0.06);
+
+  /* Subtle element shadow */
+  --shadow-sm:
+    0px 1px 4px rgba(0, 0, 0, 0.06),
+    0px 2px 8px rgba(0, 0, 0, 0.04);
+
+  /* ─────────────────────────────────────────
+   * BACKDROP BLUR
+   * ───────────────────────────────────────── */
+
+  --blur-sm:                    blur(4px);
+  --blur-md:                    blur(10px);
+  --blur-lg:                    blur(20px);
+
+  /* ─────────────────────────────────────────
+   * TRANSITIONS
+   * ───────────────────────────────────────── */
+
+  --transition-fast:            150ms ease;
+  --transition-base:            250ms ease;
+  --transition-slow:            400ms ease;
+}
