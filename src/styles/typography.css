@@ -1,0 +1,135 @@
+/*
+ * typography.css — utility classes for Figma text styles
+ *
+ * Uses tokens from tokens.css.
+ * Apply these class names directly in components.
+ */
+
+/* ─── Heading scale (Poppins) ─────────────────── */
+
+.text-heading-l {
+  font-family: var(--font-heading);
+  font-size: var(--text-heading-l);
+  font-weight: 600;
+  line-height: var(--lh-heading);
+  letter-spacing: var(--ls-heading);
+}
+
+.text-heading-m {
+  font-family: var(--font-heading);
+  font-size: var(--text-heading-m);
+  font-weight: 600;
+  line-height: var(--lh-heading);
+  letter-spacing: var(--ls-heading);
+}
+
+.text-heading-s {
+  font-family: var(--font-heading);
+  font-size: var(--text-heading-s);
+  font-weight: 600;
+  line-height: var(--lh-heading);
+  letter-spacing: var(--ls-heading);
+}
+
+.text-heading-xs {
+  font-family: var(--font-heading);
+  font-size: var(--text-heading-xs);
+  font-weight: 600;
+  line-height: var(--lh-heading);
+  letter-spacing: var(--ls-heading);
+}
+
+/* ─── Display scale (Poppins Medium) ──────────── */
+
+.text-display-s {
+  font-family: var(--font-heading);
+  font-size: var(--text-display-s);
+  font-weight: 500;
+  line-height: 52px;
+  letter-spacing: var(--ls-heading);
+}
+
+.text-display-xs {
+  font-family: var(--font-heading);
+  font-size: var(--text-display-xs);
+  font-weight: 500;
+  line-height: 44px;
+  letter-spacing: var(--ls-heading);
+}
+
+/* ─── Label scale (Satoshi Medium) ────────────── */
+
+.text-label-xl {
+  font-family: var(--font-body);
+  font-size: var(--text-label-xl);
+  font-weight: 500;
+  line-height: var(--lh-label);
+}
+
+.text-label-l {
+  font-family: var(--font-body);
+  font-size: var(--text-label-l);
+  font-weight: 500;
+  line-height: var(--lh-label);
+}
+
+.text-label-m {
+  font-family: var(--font-body);
+  font-size: var(--text-label-m);
+  font-weight: 500;
+  line-height: var(--lh-label);
+}
+
+.text-label-s {
+  font-family: var(--font-body);
+  font-size: var(--text-label-s);
+  font-weight: 500;
+  line-height: var(--lh-label);
+}
+
+.text-label-xs {
+  font-family: var(--font-body);
+  font-size: var(--text-label-xs);
+  font-weight: 500;
+  line-height: var(--lh-label-xs);
+}
+
+/* ─── Body scale (Satoshi Regular) ────────────── */
+
+.text-body-l {
+  font-family: var(--font-body);
+  font-size: var(--text-body-l);
+  font-weight: 400;
+  line-height: var(--lh-body-l);
+}
+
+.text-body-m {
+  font-family: var(--font-body);
+  font-size: var(--text-body-m);
+  font-weight: 400;
+  line-height: var(--lh-body-m);
+}
+
+.text-body-s {
+  font-family: var(--font-body);
+  font-size: var(--text-body-s);
+  font-weight: 400;
+  line-height: var(--lh-body-m);
+}
+
+.text-body-xs {
+  font-family: var(--font-body);
+  font-size: var(--text-body-xs);
+  font-weight: 400;
+  line-height: var(--lh-label-xs);
+}
+
+/* ─── Logo (Clash Display Bold) ────────────────── */
+
+.text-logo {
+  font-family: var(--font-logo);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0;
+}
