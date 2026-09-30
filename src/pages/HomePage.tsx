@@ -3,6 +3,8 @@ import Hero from '../sections/home/Hero'
 import LogoMarquee from '../sections/home/LogoMarquee'
 import FeaturedCategories from '../sections/home/FeaturedCategories'
 import CoursesSection from '../sections/home/CoursesSection'
+import ExploreCategoriesSection from '../sections/home/ExploreCategoriesSection'
+import StatsSection from '../sections/home/StatsSection'
 
 /**
  * HomePage — ByteSpace landing page.
@@ -16,7 +18,8 @@ const HomePage = () => (
       <LogoMarquee />
       <FeaturedCategories />
       <CoursesSection />
-      {/* T8 Stats + Explore Learning Paths */}
+      <ExploreCategoriesSection />
+      <StatsSection />
       {/* T9 Footer */}
     </main>
   </>
