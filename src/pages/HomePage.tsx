@@ -5,10 +5,11 @@ import FeaturedCategories from '../sections/home/FeaturedCategories'
 import CoursesSection from '../sections/home/CoursesSection'
 import ExploreCategoriesSection from '../sections/home/ExploreCategoriesSection'
 import StatsSection from '../sections/home/StatsSection'
+import Footer from '../sections/home/Footer'
 
 /**
  * HomePage — ByteSpace landing page.
- * Sections are added here as each task is completed.
+ * Fully assembled Landing Page for Milestone 1.
  */
 const HomePage = () => (
   <>
@@ -20,8 +21,8 @@ const HomePage = () => (
       <CoursesSection />
       <ExploreCategoriesSection />
       <StatsSection />
-      {/* T9 Footer */}
     </main>
+    <Footer />
   </>
 )
 
