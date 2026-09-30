@@ -1,5 +1,8 @@
 import Navbar from '../sections/home/Navbar'
 import Hero from '../sections/home/Hero'
+import LogoMarquee from '../sections/home/LogoMarquee'
+import FeaturedCategories from '../sections/home/FeaturedCategories'
+import CoursesSection from '../sections/home/CoursesSection'
 
 /**
  * HomePage — ByteSpace landing page.
@@ -10,9 +13,9 @@ const HomePage = () => (
     <Navbar />
     <main>
       <Hero />
-      {/* T5 Logo Marquee */}
-      {/* T6 Featured Categories */}
-      {/* T7 Courses */}
+      <LogoMarquee />
+      <FeaturedCategories />
+      <CoursesSection />
       {/* T8 Stats + Explore Learning Paths */}
       {/* T9 Footer */}
     </main>

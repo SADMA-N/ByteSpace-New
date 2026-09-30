@@ -113,8 +113,17 @@
     0px 1px 4px rgba(0, 0, 0, 0.06),
     0px 2px 8px rgba(0, 0, 0, 0.04);
 
+  /* ── Animations ── */
+  --animate-marquee:             marquee-scroll 30s linear infinite;
+
   /* ── Max widths ── */
   --max-width-content:           1200px;
+
+  /* ── Custom breakpoints ──
+     wide: 1200px  -- used by FeaturedCategories to activate 6-column grid.
+     Named breakpoints are preferred over min-[VALUE]: arbitrary syntax,
+     which is not compiled by the current Tailwind v4 / @tailwindcss/vite setup. */
+  --breakpoint-wide:             75rem; /* 1200px */
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -191,5 +200,24 @@ body {
 
   @media (max-width: 640px) {
     .container { padding-inline: var(--page-padding-x-mobile); }
+  }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ * KEYFRAMES
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ * REDUCED MOTION
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation-play-state: paused;
   }
 }
