@@ -1,3 +1,5 @@
+import { useId } from 'react'
+
 /**
  * StarRating
  *
@@ -9,12 +11,16 @@
  * Fill colors use Tailwind fill-* utilities (fill-lime-400, fill-shuttle-200).
  *
  * Half-star: two overlaid SVG paths — empty star base + filled star
- * clipped to left 50% via SVG clipPath.
+ * clipped to left 50% via a per-instance SVG clipPath.
+ *
+ * useId() (React 18) is used to generate a stable, unique clipPath id
+ * per component instance, preventing duplicate SVG id collisions when
+ * multiple StarRating components appear on the same page.
  *
  * Rounding:
- *   fraction >= 0.5 → half star
- *   fraction <  0.5 → floor (no half star)
- *   4.5 → 4 full + 1 half   |   4.2 → 4 full + 1 empty   |   3.5 → 3 full + 1 half + 1 empty
+ *   fraction >= 0.5 -> half star
+ *   fraction <  0.5 -> floor (no half star)
+ *   4.5 -> 4 full + 1 half  |  4.2 -> 4 full + 1 empty  |  3.5 -> 3 full + 1 half + 1 empty
  *
  * Accessibility: aria-label on wrapper; all stars are aria-hidden.
  */
@@ -34,14 +40,14 @@ const TOTAL_STARS = 5
 const STAR_PATH =
   'M12 2L14.9 9.26L22 10.27L17 15.14L18.18 22.02L12 18.77L5.82 22.02L7 15.14L2 10.27L9.1 9.26L12 2Z'
 
-const HALF_CLIP_ID = 'sr-half-clip'
-
 interface StarIconProps {
   type: 'filled' | 'half' | 'empty'
   px: number
+  /** Per-instance unique id for the half-star clipPath */
+  clipId: string
 }
 
-const StarIcon = ({ type, px }: StarIconProps) => {
+const StarIcon = ({ type, px, clipId }: StarIconProps) => {
   if (type === 'half') {
     return (
       <svg
@@ -53,14 +59,14 @@ const StarIcon = ({ type, px }: StarIconProps) => {
         aria-hidden="true"
       >
         <defs>
-          <clipPath id={HALF_CLIP_ID}>
+          <clipPath id={clipId}>
             <rect x="0" y="0" width="12" height="24" />
           </clipPath>
         </defs>
         {/* Empty star base */}
         <path d={STAR_PATH} className="fill-shuttle-200" />
         {/* Filled star clipped to left 50% */}
-        <path d={STAR_PATH} className="fill-lime-400" clipPath={`url(#${HALF_CLIP_ID})`} />
+        <path d={STAR_PATH} className="fill-lime-400" clipPath={`url(#${clipId})`} />
       </svg>
     )
   }
@@ -88,6 +94,9 @@ const StarRating = ({
   showCount = false,
   size = 'sm',
 }: StarRatingProps) => {
+  const instanceId = useId()
+  const clipId = `star-half-${instanceId}`
+
   const fullStars = Math.floor(rating)
   const hasHalf = rating - fullStars >= 0.5
   const emptyStars = TOTAL_STARS - fullStars - (hasHalf ? 1 : 0)
@@ -112,11 +121,11 @@ const StarRating = ({
       <span className={valueClass}>{rating}</span>
       <span className="inline-flex items-center gap-0.5" aria-hidden="true">
         {Array.from({ length: fullStars }, (_, i) => (
-          <StarIcon key={`f${i}`} type="filled" px={px} />
+          <StarIcon key={`f${i}`} type="filled" px={px} clipId={clipId} />
         ))}
-        {hasHalf && <StarIcon key="half" type="half" px={px} />}
+        {hasHalf && <StarIcon key="half" type="half" px={px} clipId={clipId} />}
         {Array.from({ length: emptyStars }, (_, i) => (
-          <StarIcon key={`e${i}`} type="empty" px={px} />
+          <StarIcon key={`e${i}`} type="empty" px={px} clipId={clipId} />
         ))}
       </span>
       {showCount && count !== undefined && (
