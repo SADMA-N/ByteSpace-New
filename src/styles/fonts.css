@@ -1,13 +1,18 @@
 /*
- * fonts.css — font-family declarations only.
+ * fonts.css — documents font loading only.
  *
- * Font loading is handled via <link> tags in index.html (with preconnect).
- * To switch to self-hosted fonts, replace the <link> tags in index.html
- * and update the font-family stacks below — no other file needs changing.
+ * All three fonts (Poppins, Satoshi, Clash Display) are loaded via
+ * <link rel="stylesheet"> tags in index.html, with <link rel="preconnect">
+ * hints for fonts.googleapis.com, fonts.gstatic.com, and api.fontshare.com.
+ *
+ * Font-family CSS variables are defined in globals.css inside @theme:
+ *   --font-heading: 'Poppins', system-ui, sans-serif
+ *   --font-body:    'Satoshi', system-ui, sans-serif
+ *   --font-logo:    'Clash Display', system-ui, sans-serif
+ *
+ * To switch from CDN to self-hosted fonts:
+ *   1. Add @font-face declarations here (or in a new self-hosted-fonts.css)
+ *   2. Replace the three <link> tags in index.html
+ *   3. Update the font-family stacks in the globals.css @theme block
+ *   No component files need changing.
  */
-
-:root {
-  --font-heading: 'Poppins', system-ui, sans-serif;
-  --font-body:    'Satoshi', system-ui, sans-serif;
-  --font-logo:    'Clash Display', system-ui, sans-serif;
-}

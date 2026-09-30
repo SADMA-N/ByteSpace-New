@@ -200,22 +200,38 @@ Figma is the **visual source of truth**.
 
 **Use:**
 - React + TypeScript
+- Tailwind CSS v4 (`@tailwindcss/vite` plugin — no PostCSS config)
 - Reusable components
 - Semantic HTML
 - Responsive layouts
 - Explicit TypeScript prop interfaces
-- Design tokens for all colors, fonts, and spacing
+- Figma design tokens defined in `src/styles/globals.css` inside `@theme`
+
+**Styling system:**
+- All styling uses Tailwind utility classes in component `.tsx` files
+- No separate per-component CSS files
+- Design tokens live in `@theme` inside `globals.css` — this is the single source of truth
+- CSS files in `src/styles/`: `globals.css` (main entry + tokens + @theme) and `fonts.css` (docs only)
+- `tokens.css`, `reset.css`, and `typography.css` were removed in T2 — do not recreate them
+- Tailwind Preflight serves as the CSS reset
+- The `.container` utility is defined in `globals.css` `@layer utilities`
+
+**Tailwind token naming rule — MANDATORY:**
+When defining tokens in `@theme`, names must not collide with Tailwind's built-in utility suffixes.
+Unsafe radius suffixes: `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl` and side/corner modifiers: `t`, `r`, `b`, `l`, `s`, `e`, `tl`, `tr`, `bl`, `br`, `ss`, `se`, `ee`, `es`.
+Unsafe shadow suffixes: `sm`, `md`, `lg`, `xl`, `2xl`, `inner`, `none`.
+Use descriptive names (e.g. `--radius-control`, `--radius-card`, `--shadow-card`, `--shadow-subtle`).
 
 **Project structure:**
 ```
 src/
-  components/    ← shared, reusable UI components
-  sections/      ← page sections (home/, auth/)
-  pages/         ← page-level components
-  assets/        ← images, icons, logos
-  styles/        ← tokens.css, typography.css, fonts.css, reset.css, globals.css
-  data/          ← static mock data
-  types/         ← shared TypeScript interfaces
+  components/    -- shared, reusable UI components
+  sections/      -- page sections (home/, auth/)
+  pages/         -- page-level components
+  assets/        -- images, icons, logos
+  styles/        -- globals.css (Tailwind entry + @theme tokens), fonts.css (docs)
+  data/          -- static mock data
+  types/         -- shared TypeScript interfaces
 ```
 
 **Avoid:**
@@ -223,8 +239,9 @@ src/
 - Duplicated code
 - Giant monolithic components
 - Unnecessary abstractions
-- Hardcoded magic values
-- Excessive inline styles
+- Hardcoded magic values (use tokens from globals.css @theme)
+- Inline `style={{}}` objects (use Tailwind classes)
+- Per-component CSS files (styling belongs in .tsx className strings)
 
 **Do not leave:**
 - `console.log` statements
@@ -260,6 +277,19 @@ Before running `npm install <package>`:
 | Never modify unrelated files | MANDATORY |
 | Never overwrite existing work without asking | MANDATORY |
 | Always branch from latest `main` | MANDATORY |
+
+---
+
+## No Emojis — Anywhere
+
+Do not use emojis in:
+- PR titles or descriptions
+- Commit messages
+- Code or code comments
+- README
+- Reports to the user
+
+Use plain professional text only.
 
 ---
 

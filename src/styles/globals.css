@@ -1,15 +1,158 @@
 /*
- * globals.css — entry point for all styles
+ * globals.css — entry point for all styles.
  *
- * Import order matters: fonts → reset → tokens → typography → base
+ * @import "tailwindcss" loads:
+ *   - Tailwind Preflight (CSS reset)
+ *   - All Tailwind utility classes (JIT — only what is used)
+ *
+ * @theme maps all Figma design tokens into Tailwind's design system.
+ * Every token is available as:
+ *   - A CSS custom property: var(--color-persian-blue)
+ *   - A Tailwind utility class: bg-persian-blue, text-persian-blue, etc.
+ *
+ * NAMING RULE: token names must not collide with Tailwind built-in utility
+ * suffixes. Unsafe radius suffixes: xs, sm, md, lg, xl, 2xl, 3xl, 4xl
+ * and side/corner modifiers: t, r, b, l, s, e, tl, tr, bl, br, ss, se, ee, es.
+ * Unsafe shadow suffixes: sm, md, lg, xl, 2xl, inner, none.
+ * Use descriptive names (control, card, feature, subtle) to avoid collisions.
+ *
+ * Font loading is handled via <link> tags in index.html.
  */
 
-@import './fonts.css';
-@import './reset.css';
-@import './tokens.css';
-@import './typography.css';
+@import "tailwindcss";
+@import "./fonts.css";
 
-/* ─── Base element styles ─── */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ * DESIGN TOKENS — Figma source of truth
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+@theme {
+  /* ── Brand colors ── */
+  --color-persian-blue:          #003BE2;
+  --color-lime-400:              #D4FB20;
+  --color-lime-500:              #CBFC01;
+  --color-lime-green-alt:        #C1E338;
+  --color-electric-violet-600:   #7F30F7;
+  --color-electric-violet-950:   #300B6A;
+
+  /* ── Shuttle Gray scale ── */
+  --color-shuttle-950:           #242528;
+  --color-shuttle-900:           #3A3B3F;
+  --color-shuttle-800:           #424348;
+  --color-shuttle-700:           #4B4C53;
+  --color-shuttle-400:           #82868E;
+  --color-shuttle-200:           #CED0D3;
+  --color-shuttle-100:           #E5E6E8;
+  --color-shuttle-50:            #F5F5F6;
+
+  /* ── Neutrals ── */
+  --color-near-black:            #040819;
+  --color-off-white:             #FAFAFA;
+
+  /* ── Semantic aliases (static values — @theme cannot use var()) ── */
+  --color-bg-hero:               #003BE2;
+  --color-bg-section-light:      #F5F5F6;
+  --color-bg-section-off:        #FAFAFA;
+  --color-text-primary:          #242528;
+  --color-text-secondary:        #4B4C53;
+  --color-text-muted:            #82868E;
+  --color-text-on-dark:          #FFFFFF;
+  --color-text-link:             #003BE2;
+  --color-border-default:        #CED0D3;
+  --color-border-light:          #E5E6E8;
+
+  /* ── Font families ── */
+  --font-heading:                'Poppins', system-ui, sans-serif;
+  --font-body:                   'Satoshi', system-ui, sans-serif;
+  --font-logo:                   'Clash Display', system-ui, sans-serif;
+
+  /* ── Font sizes (Figma text styles) ── */
+  /* Compound names (heading-l, body-m) avoid collision with Tailwind's
+     built-in single-word size names (xs, sm, base, lg, xl, 2xl …). */
+  --text-heading-l:              72px;
+  --text-heading-m:              44px;
+  --text-heading-s:              36px;
+  --text-heading-xs:             20px;
+  --text-display-s:              44px;
+  --text-display-xs:             36px;
+  --text-label-xl:               20px;
+  --text-label-l:                18px;
+  --text-label-m:                16px;
+  --text-label-s:                14px;
+  --text-label-xs:               12px;
+  --text-body-l:                 18px;
+  --text-body-m:                 16px;
+  --text-body-s:                 14px;
+  --text-body-xs:                12px;
+
+  /* ── Border radius ──
+     Descriptive names avoid collision with:
+       • Tailwind size suffixes (xs, sm, md, lg, xl, 2xl, 3xl …)
+       • Tailwind side/corner suffixes (t, r, b, l, s, e, tl, tr, bl, br …)
+     rounded-full is a Tailwind built-in — use it directly, no custom token.  */
+  --radius-tag:                  8px;    /* search tags, small chips     */
+  --radius-card:                 16px;   /* course cards, float cards    */
+  --radius-control:              24px;   /* buttons, badges, pills, tabs */
+  --radius-feature:              40px;   /* large hero / feature cards   */
+  --radius-pill:                 100px;  /* pill shapes                  */
+
+  /* ── Shadows ──
+     Descriptive names avoid collision with Tailwind built-ins:
+     shadow-sm, shadow-md, shadow-lg, shadow-xl, shadow-2xl, shadow-inner */
+  --shadow-card:
+    0.52px 0.74px 3.04px rgba(0, 0, 0, 0.04),
+    2.23px 3.19px 5.72px rgba(0, 0, 0, 0.06),
+    5.38px 7.69px 9.57px rgba(0, 0, 0, 0.07),
+    10.21px 14.58px 16.09px rgba(0, 0, 0, 0.08),
+    16.95px 24.21px 24px rgba(0, 0, 0, 0.09),
+    25.84px 36.91px 36px rgba(0, 0, 0, 0.10);
+  --shadow-float:
+    0px 4px 12px rgba(0, 0, 0, 0.08),
+    0px 8px 24px rgba(0, 0, 0, 0.06);
+  --shadow-subtle:
+    0px 1px 4px rgba(0, 0, 0, 0.06),
+    0px 2px 8px rgba(0, 0, 0, 0.04);
+
+  /* ── Max widths ── */
+  --max-width-content:           1200px;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ * NON-UTILITY CSS VARS
+ * Needed as var() references but not as Tailwind utility classes.
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+:root {
+  /* Layout */
+  --page-padding-x:              120px;
+  --page-padding-x-tablet:       48px;
+  --page-padding-x-mobile:       20px;
+  --canvas-width:                1440px;
+
+  /* Line heights */
+  --lh-heading:                  1.2em;
+  --lh-body-l:                   1.6em;
+  --lh-body-m:                   1.6em;
+  --lh-label:                    1.2em;
+  --lh-label-xs:                 20px;
+
+  /* Letter spacing */
+  --ls-heading:                  -0.01em;
+
+  /* Backdrop blur */
+  --blur-sm:                     blur(4px);
+  --blur-md:                     blur(10px);
+  --blur-lg:                     blur(20px);
+
+  /* Transitions */
+  --transition-fast:             150ms ease;
+  --transition-base:             250ms ease;
+  --transition-slow:             400ms ease;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ * BASE ELEMENT STYLES
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 
 html {
   font-size: 16px;
@@ -17,10 +160,7 @@ html {
 
 body {
   font-family: var(--font-body);
-  font-size: var(--text-body-m);
-  font-weight: 400;
-  color: var(--color-text-primary);
-  background-color: var(--color-bg-page);
+  color: var(--color-shuttle-950);
   min-height: 100dvh;
   width: 100%;
 }
@@ -32,37 +172,24 @@ body {
   flex-direction: column;
 }
 
-/* ─── Content container utility ─── */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ * CUSTOM UTILITIES
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 
-.container {
-  width: 100%;
-  max-width: var(--max-content-width);
-  margin-inline: auto;
-  padding-inline: var(--page-padding-x);
-}
-
-@media (max-width: 1024px) {
+@layer utilities {
+  /* Responsive content container */
   .container {
-    padding-inline: var(--page-padding-x-tablet);
+    width: 100%;
+    max-width: var(--max-width-content);
+    margin-inline: auto;
+    padding-inline: var(--page-padding-x);
   }
-}
 
-@media (max-width: 768px) {
-  .container {
-    padding-inline: var(--page-padding-x-mobile);
+  @media (max-width: 1024px) {
+    .container { padding-inline: var(--page-padding-x-tablet); }
   }
-}
 
-/* ─── Visually hidden (accessibility) ─── */
-
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
+  @media (max-width: 640px) {
+    .container { padding-inline: var(--page-padding-x-mobile); }
+  }
 }
