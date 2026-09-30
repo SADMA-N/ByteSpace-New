@@ -15,3 +15,6 @@ export type { CategoryPillProps } from './CategoryPill'
 
 export { default as SectionLabel } from './SectionLabel'
 export type { SectionLabelProps } from './SectionLabel'
+
+export { default as CourseCard } from './CourseCard'
+export type { CourseCardProps, CourseLevel } from './CourseCard'

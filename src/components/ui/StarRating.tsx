@@ -13,7 +13,7 @@ import { useId } from 'react'
  * Half-star: two overlaid SVG paths — empty star base + filled star
  * clipped to left 50% via a per-instance SVG clipPath.
  *
- * useId() (React 18) is used to generate a stable, unique clipPath id
+ * useId() (React 19) is used to generate a stable, unique clipPath id
  * per component instance, preventing duplicate SVG id collisions when
  * multiple StarRating components appear on the same page.
  *
@@ -95,7 +95,7 @@ const StarRating = ({
   size = 'sm',
 }: StarRatingProps) => {
   const instanceId = useId()
-  const clipId = `star-half-${instanceId}`
+  const clipId = `star-half-${instanceId.replace(/[^a-z0-9]/gi, '')}`
 
   const fullStars = Math.floor(rating)
   const hasHalf = rating - fullStars >= 0.5
