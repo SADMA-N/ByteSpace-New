@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
+import LogoIcon from '../icons/LogoIcon'
 
 interface AuthLayoutProps {
   children: ReactNode
@@ -14,11 +15,9 @@ export function AuthLayout({ children, title, subtitle, linkText, linkTo }: Auth
     <div className="min-h-screen bg-shuttle-50 flex flex-col justify-center items-center px-4 py-12 sm:px-6 lg:px-8">
       {/* Brand logo header */}
       <div className="mb-8">
-        <Link to="/" className="inline-flex items-center gap-2.5 focus:outline-none" aria-label="ByteSpace Home">
-          <div className="w-10 h-10 rounded-full bg-lime-400 flex items-center justify-center">
-            <span className="font-logo font-bold text-shuttle-950 text-xl">b</span>
-          </div>
-          <span className="font-logo font-bold text-shuttle-950 text-2xl tracking-tight">
+        <Link to="/" className="inline-flex items-center gap-2 select-none focus:outline-none" aria-label="ByteSpace Home">
+          <LogoIcon width={29} aria-hidden="true" />
+          <span className="font-logo font-bold text-[24px] text-shuttle-950 leading-none select-none">
             ByteSpace
           </span>
         </Link>
@@ -30,7 +29,7 @@ export function AuthLayout({ children, title, subtitle, linkText, linkTo }: Auth
           <h1 className="text-heading-s font-heading font-semibold text-shuttle-950">
             {title}
           </h1>
-          <p className="mt-2 text-body text-shuttle-600 font-body">
+          <p className="mt-2 text-body-m text-shuttle-600 font-body">
             {subtitle}{' '}
             <Link
               to={linkTo}
