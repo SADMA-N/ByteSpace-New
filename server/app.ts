@@ -1,6 +1,7 @@
 import express, { type Request, type Response, type NextFunction } from 'express'
 import cookieParser from 'cookie-parser'
 import { healthRouter } from './routes/health.js'
+import { authRouter } from './routes/auth.js'
 
 const app = express()
 
@@ -10,6 +11,7 @@ app.use(cookieParser())
 
 // ── Routes ──────────────────────────────────────────────────────────────────
 app.use('/api/health', healthRouter)
+app.use('/api/auth', authRouter)
 
 // ── 404 handler ─────────────────────────────────────────────────────────────
 app.use((_req: Request, res: Response) => {
