@@ -1,0 +1,80 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  role         Role     @default(USER)
+  avatarUrl    String?
+  bio          String?
+  courses      Course[] @relation("CreatorCourses")
+  reviews      Review[]
+  createdAt    DateTime @default(now())
+}
+
+enum Role {
+  USER
+  CREATOR
+}
+
+model Category {
+  id      String   @id @default(cuid())
+  name    String
+  slug    String   @unique
+  courses Course[]
+}
+
+model Course {
+  id              String   @id @default(cuid())
+  slug            String   @unique
+  title           String
+  description     String
+  thumbnail       String
+  level           Level
+  rating          Float    @default(0)
+  ratingCount     Int      @default(0)
+  studentCount    Int      @default(0)
+  durationMinutes Int
+  categoryId      String
+  category        Category @relation(fields: [categoryId], references: [id])
+  creatorId       String
+  creator         User     @relation("CreatorCourses", fields: [creatorId], references: [id])
+  lessons         Lesson[]
+  reviews         Review[]
+  createdAt       DateTime @default(now())
+}
+
+enum Level {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}
+
+model Lesson {
+  id              String @id @default(cuid())
+  courseId        String
+  course          Course @relation(fields: [courseId], references: [id])
+  title           String
+  durationMinutes Int
+  order           Int
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  courseId  String
+  course    Course   @relation(fields: [courseId], references: [id])
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  rating    Int
+  comment   String
+  createdAt DateTime @default(now())
+
+  @@unique([courseId, userId])
+}
