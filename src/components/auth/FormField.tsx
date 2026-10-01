@@ -21,7 +21,7 @@ export function FormField({ label, error, id, type = 'text', className = '', ...
           type={inputType}
           className={`w-full h-12 px-4 rounded-control bg-shuttle-50/60 border ${
             error ? 'border-red-500 focus:ring-red-400/20' : 'border-shuttle-200 focus:border-shuttle-950 focus:ring-shuttle-950/10'
-          } font-body text-body text-shuttle-950 placeholder:text-shuttle-400 transition-all duration-150 focus:outline-none focus:ring-2 ${
+          } font-body text-body-m text-shuttle-950 placeholder:text-shuttle-400 transition-all duration-150 focus:outline-none focus:ring-2 ${
             isPassword ? 'pr-12' : ''
           } ${className}`}
           {...props}
